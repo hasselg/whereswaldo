@@ -1,0 +1,24 @@
+version: '2'
+services:
+  redishost:
+    image: redis:3.2.5
+    ports:
+      - "127.0.0.1:6379:6379"
+  mongo:
+    image: tutum/mongodb:3.2
+    ports:
+      - "127.0.0.1:27017:27017"
+      - "127.0.0.1:28017:28018"
+    environment:
+      - AUTH=no
+  huey:
+    build: ./s3_publisher
+    command: huey_consumer.py exifextractortask.huey -k greenlet -w 100
+    depends_on:
+      - "redishost"
+      - "mongo"
+  s3_publisher:
+    build: ./s3_publisher
+    command: python publisher.py
+    depends_on:
+      - "huey"
