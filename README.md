@@ -4,5 +4,6 @@ This project depends on Docker. The Docker images defined within this project th
 # Usage
 The expected usage is with docker-compose. From the project root directory, run 
 ```
+$ docker-compose build
 $ docker-compose up
 ```
