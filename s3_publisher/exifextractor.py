@@ -1,6 +1,3 @@
-
-from gevent import monkey; monkey.patch_all()
-
 from io import BytesIO
 import exifread
 import requests

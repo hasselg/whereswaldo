@@ -13,7 +13,7 @@ services:
       - AUTH=no
   huey:
     build: ./s3_publisher
-    command: huey_consumer.py exifextractortask.huey -k greenlet -w 100
+    command: huey_consumer.py exifextractortask.huey -k process -w 4 -n
     depends_on:
       - "redishost"
       - "mongo"
